@@ -74,7 +74,6 @@ export default {
           variant: 'secondary',
           formatter: (value, key, item) => {
             return value === 1 ? '' : 'user'
-            // return { value, key, item }
           }
         },
         {
@@ -82,37 +81,16 @@ export default {
           sortable: false
         },
         {
-          key: 'api_token',
-          sortable: false,
-          variant: 'warning'
-        },
-        {
-          key: 'gl_token',
-          sortable: false,
-          variant: 'warning'
-        },
-        {
-          key: 'fb_token',
-          sortable: false,
-          variant: 'warning'
-        },
-        {
           key: 'created_at',
           label: 'Created',
           sortable: true,
-          variant: 'info'
+          variant: 'primary'
         },
         {
           key: 'verified_at',
           label: 'Verified',
           sortable: true,
-          variant: 'info'
-        },
-        {
-          key: 'updated_at',
-          label: 'Updated',
-          sortable: true,
-          variant: 'info'
+          variant: 'primary'
         }
       ]
     }
@@ -132,7 +110,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
 <template>
@@ -140,12 +117,12 @@ export default {
     <h2>Index Component</h2>
     <div>
       <b-button
-        class="mb-4"
+        class="mb-4 p-4"
         variant="outline-danger"
         size="lg"
         @click="showAllUsers"
       >
-        <span class="text-uppercase">show all users</span>
+        <span class="text-uppercase">show users</span>
       </b-button>
     </div>
     <div v-if="users">
@@ -159,24 +136,19 @@ export default {
         :fields="columns"
       >
       </b-table>
-      <b-skeleton-table
-        :rows="5"
-        :columns="4"
-        :table-props="{ bordered: true, striped: true, small }"
-      ></b-skeleton-table>
     </div>
-    <b-container fluid="true">
-      <div
-        v-for="user in users"
-        :key="user.id"
-      >
-        <b-row >
-          <b-col>
-            <pre>{{ user }}</pre>
-          </b-col>
-        </b-row>
-      </div>
-    </b-container>
+<!--    <b-container fluid="true">-->
+<!--      <div-->
+<!--        v-for="user in users"-->
+<!--        :key="user.id"-->
+<!--      >-->
+<!--        <b-row >-->
+<!--          <b-col>-->
+<!--            <pre>{{ user }}</pre>-->
+<!--          </b-col>-->
+<!--        </b-row>-->
+<!--      </div>-->
+<!--    </b-container>-->
   </div>
 </template>
 
