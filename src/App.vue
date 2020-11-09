@@ -1,7 +1,7 @@
 <template>
   <div id="app">
   <HeaderComponent></HeaderComponent>
-    <b-container fluid="true" class="p-4">
+    <b-container fluid="true" class="p-2">
       <b-row>
         <b-col>
           <router-view></router-view>

@@ -7,7 +7,7 @@
         size="lg"
         @click="showAllUsers"
       >
-        <span class="text-uppercase">show all users</span>
+        <span class="text-uppercase">show</span>
       </b-button>
     </div>
     <div v-if="users">
@@ -49,7 +49,7 @@ export default {
         {
           key: 'id',
           sortable: true,
-          label: '#ID'
+          label: '#'
         },
         {
           key: 'name',
