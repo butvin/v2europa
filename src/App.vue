@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-  <HeaderComponent></HeaderComponent>
-    <b-container fluid="true" class="p-2">
-      <b-row>
-        <b-col>
-          <router-view></router-view>
-        </b-col>
-      </b-row>
-    </b-container>
+  <HeaderComponent />
+  <b-container fluid="true" class="p-2">
+    <b-row>
+      <b-col>
+        <router-view></router-view>
+      </b-col>
+    </b-row>
+  </b-container>
   </div>
 </template>
 
