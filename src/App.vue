@@ -9,14 +9,7 @@
         </b-col>
       </b-row>
     </b-container>
-<!--    <b-container>-->
-<!--      <b-row>-->
-<!--        <b-col>-->
-<!--          <IndexComponent />-->
-<!--        </b-col>-->
-<!--      </b-row>-->
-<!--    </b-container>-->
-    <b-container>
+    <b-container fluid="true" class="p-4">
       <b-row>
         <b-col>
           <router-view></router-view>
@@ -40,6 +33,6 @@ export default {
 <style>
 #app {
   color: #272625;
-  background: #fff1b9;
+  background: #fffff3;
 }
 </style>
