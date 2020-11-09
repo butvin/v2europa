@@ -1,15 +1,12 @@
 <template>
   <div class="index-component">
-    <h1>{{ componentName }}</h1>
+    <h1>Index Component</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'IndexComponent',
-  props: {
-    componentName: String
-  }
+  name: 'IndexComponent'
 }
 </script>
 

@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <IndexComponent componentName="IndexComponent"/>
+<!--    <b-container>-->
+<!--      <b-row>-->
+<!--        <b-col>-->
+          <IndexComponent />
+<!--        </b-col>-->
+<!--      </b-row>-->
+<!--    </b-container>-->
   </div>
 </template>
 
