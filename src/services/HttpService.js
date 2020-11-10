@@ -1,20 +1,19 @@
 import http from '@/http.js'
 
 class HttpService {
-  getAllUsers () {
+  $getAll () {
     return http.get('/users')
   }
 
+  $create (data) {
+    return http.post('/user/register', data)
+  }
   // get (id) {
   //   return http.get(`/user/${id}`)
   // }
   //
   // delete (id) {
   //   return http.delete(`/users/${id}`)
-  // }
-  //
-  // $create (data) {
-  //   return http.post('/user/register', data)
   // }
   //
   // $auth (data) {
