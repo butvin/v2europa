@@ -3,21 +3,21 @@
     <b-form
       id="registration-form"
       v-if="showForm"
-      @submit="onSubmit"
-      @reset="onReset"
-      class="shadow-lg p-3 mb-5 bg-white rounded"
+      @submit="onSubmit.prevent"
+      @reset="onReset.prevent"
+      class="shadow-lg p-4 mb-4 bg-white"
     >
       <!-- Title area-->
-      <b-form-row>
+      <b-form-row class="m-2">
         <b-col sm="12" class="text-center">
-          <h2><span>Registration</span></h2>
+          <h2>Registration</h2>
         </b-col>
       </b-form-row>
       <!-- Email field -->
-      <b-form-row>
+      <b-form-row class="mt-2">
         <b-col sm="1"></b-col>
         <b-col sm="11">
-          <b-form-text>Email address</b-form-text>
+          <b-form-text class="text-uppercase">Email address</b-form-text>
         </b-col>
         <b-col sm="1">
           <b-icon icon="envelope-fill" font-scale="1.75" class="float-right"></b-icon>
@@ -27,10 +27,10 @@
         </b-col>
       </b-form-row>
       <!-- Phone field -->
-      <b-form-row>
+      <b-form-row class="mt-4">
         <b-col sm="1"></b-col>
         <b-col sm="11">
-          <b-form-text>Phone number</b-form-text>
+          <b-form-text class="text-uppercase">Phone number</b-form-text>
         </b-col>
         <b-col sm="1">
           <b-icon icon="phone-fill" font-scale="1.75" class="float-right"></b-icon>
@@ -40,10 +40,10 @@
         </b-col>
       </b-form-row>
       <!-- User name field -->
-      <b-form-row>
+      <b-form-row class="mt-4">
         <b-col sm="1"></b-col>
         <b-col sm="11">
-          <b-form-text>Full name</b-form-text>
+          <b-form-text class="text-uppercase">Full name</b-form-text>
         </b-col>
         <b-col sm="1">
           <b-icon icon="person-fill" font-scale="1.75" class="float-right"></b-icon>
@@ -53,10 +53,10 @@
         </b-col>
       </b-form-row>
       <!-- Password field -->
-      <b-form-row>
+      <b-form-row class="mt-4">
         <b-col sm="1"></b-col>
         <b-col sm="11">
-          <b-form-text>Password</b-form-text>
+          <b-form-text class="text-uppercase">Password</b-form-text>
         </b-col>
         <b-col sm="1">
           <b-icon icon="lock-fill" font-scale="1.75" class="float-right"></b-icon>
@@ -65,11 +65,11 @@
           <b-form-input type="password" name="password" v-model="form.password"></b-form-input>
         </b-col>
       </b-form-row>
-      <!-- Confirmation password field -->
-      <b-form-row>
+      <!-- Password confirmation field -->
+      <b-form-row class="mt-4">
         <b-col sm="1"></b-col>
         <b-col sm="11">
-          <b-form-text>Confirm password</b-form-text>
+          <b-form-text class="text-uppercase">Confirm password</b-form-text>
         </b-col>
         <b-col sm="1">
           <b-icon icon="lock-fill" font-scale="1.75" class="float-right"></b-icon>
@@ -81,20 +81,15 @@
       <!-- Terms checkbox field -->
       <b-form-row class="mt-4">
         <b-col sm="12" md="12" lg="12" class="text-center">
-          <b-form-checkbox aria-label="ARIA-LABEL"
-            name="terms"
-            value="done"
-            unchecked-value="undone"
-            v-model="form.terms"
-          >
-            <p>I accept the terms and use</p>
+          <b-form-checkbox name="terms" value="done" unchecked-value="undone" v-model="form.terms" size="sm">
+            <p class="text-muted">I accept the terms and use</p>
           </b-form-checkbox>
         </b-col>
       </b-form-row>
       <!-- Sign up button -->
-      <b-form-row class="mt-4">
+      <b-form-row class="mt-2">
         <b-col sm="12" md="12" lg="12">
-          <b-button type="submit" variant="outline-success" block squared>
+          <b-button type="submit" variant="success" block squared>
             <span class="text-uppercase">sing&nbsp;up</span>
           </b-button>
         </b-col>
@@ -107,7 +102,8 @@
           </b-button>
         </b-col>
       </b-form-row>
-      <b-form-row class="mt-5 mb-2">
+      <!-- Register via social networks -->
+      <b-form-row class="mt-4">
         <b-col sm="6" md="6" lg="6">
           <p class="text-center">Facebook</p>
         </b-col>
@@ -140,7 +136,16 @@ export default {
       return true
     },
     onReset () {
-      return true
+      this.form.email = ''
+      this.form.phone = ''
+      this.form.name = ''
+      this.form.password = ''
+      this.form.rePassword = ''
+      this.form.terms = 'undone'
+      this.showForm = false
+      this.$nextTick(() => {
+        this.showForm = true
+      })
     }
   }
 }
@@ -149,10 +154,13 @@ export default {
 <style scoped>
 .register-component {
   background: #FFFFF3;
+  margin: 0 auto;
   width: 50%;
   height: 100%;
 }
 #registration-form {
+  margin: 0 auto;
+  max-width: 375px;
   padding: 1.5rem;
   border: 1px solid #CED4DA;
 }
