@@ -1,23 +1,20 @@
 <template>
   <div id="app">
-  <HeaderComponent />
-  <b-container fluid="true" class="p-2">
-    <b-row>
-      <b-col>
-        <router-view></router-view>
-      </b-col>
-    </b-row>
-  </b-container>
+  <header-component></header-component>
+  <router-view></router-view>
+  <footer-component></footer-component>
   </div>
 </template>
 
 <script>
 import HeaderComponent from '@/components/layouts/HeaderComponent'
+import FooterComponent from '@/components/layouts/FooterComponent'
 
 export default {
   name: 'App',
   components: {
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   }
 }
 </script>
