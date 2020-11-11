@@ -1,23 +1,40 @@
 <template>
   <div class="index-component">
-    <h2>Index Component</h2>
-    <div class="m-4">
-      <b-button @click="showAllUsers" variant="outline-dark" size="sm" squared>
-        <span class="text-uppercase m-2 p-2">show all users</span>
-      </b-button>
-    </div>
-    <div v-if="users">
-      <b-table
-        head-variant="dark"
-        bordered
-        small
-        hover
-        responsive="sm"
-        :items="users"
-        :fields="columns"
-      >
-      </b-table>
-    </div>
+    <b-container>
+      <b-row>
+        <p class="display-4 mt-4">Index Component</p>
+      </b-row>
+      <b-row>
+        <div class="mt-2 mb-2">
+          <p class="lead">Connected users:</p>
+          <b-button
+            @click="showAllUsers"
+            class="font-weight-lighter"
+            variant="primary"
+            size="lg"
+            block
+            pill
+          >
+            <span class="text-uppercase m-2">{{ 'show' }}</span>
+          </b-button>
+        </div>
+        <div v-if="users">
+          <b-table
+            head-variant="light"
+            bordered
+            small
+            hover
+            caption-top
+            :items="users"
+            :fields="columns"
+          >
+            <b-thead></b-thead>
+            <b-tbody></b-tbody>
+            <b-tfoot></b-tfoot>
+          </b-table>
+        </div>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -45,21 +62,23 @@ export default {
             return (value === 1) ? 'admin' : 'user'
           }
         },
-        { key: 'created_at', label: 'Created', sortable: true, variant: 'warning' },
-        { key: 'verified_at', label: 'Verified', sortable: true, variant: 'warning' }
+        { key: 'created_at', label: 'Created', sortable: true, variant: 'success' },
+        { key: 'verified_at', label: 'Verified', sortable: true, variant: 'dark' }
       ]
     }
   },
   methods: {
     showAllUsers () {
       httpService.$getAll().then(response => {
-        console.log(response)
+        console.log(response.status)
+        console.log(response.statusCode)
+        console.log(response.statusText)
         console.log(response.data)
         this.users = response.data
       }).catch(error => {
         console.log(error)
       }).finally(() => {
-        console.log('finally')
+        console.log('finally->getAll()')
       })
     }
   }

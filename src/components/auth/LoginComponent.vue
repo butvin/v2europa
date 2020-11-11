@@ -1,6 +1,10 @@
 <template>
   <div class="login-component">
-    <h2>Login Component</h2>
+    <b-container>
+      <b-row>
+        <p class="display-4">Login Component</p>
+      </b-row>
+    </b-container>
   </div>
 </template>
 

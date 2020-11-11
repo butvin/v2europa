@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-  <header-component></header-component>
-  <router-view></router-view>
-  <footer-component></footer-component>
+    <font-awesome-icon icon="user-secret" />
+    <header-component></header-component>
+    <router-view></router-view>
+    <footer-component></footer-component>
   </div>
 </template>
 

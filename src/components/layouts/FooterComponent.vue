@@ -1,7 +1,9 @@
 <template>
   <div class="footer-component">
     <b-container>
-      <h3>Footer Component</h3>
+      <b-row>
+        <p class="display-4">Footer Component</p>
+      </b-row>
     </b-container>
   </div>
 </template>
@@ -14,11 +16,8 @@ export default {
 
 <style scoped>
 .footer-component {
-  min-height: 250px;
+  min-height: 100px;
   background: #566270;
   color: #E0E3DA;
-}
-.footer-component a {
-  color: #fffff3;
 }
 </style>
