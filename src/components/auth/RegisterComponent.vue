@@ -176,20 +176,15 @@
 
 <script>
 import httpService from '@/services/HttpService'
-// import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import {
-  ValidationProvider,
-  ValidationObserver
-} from 'vee-validate/dist/vee-validate.full'
+import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
+
 // toDo: import rules!!!
 // import { required, email } from 'vee-validate/dist/rules'
+// import { ValidationProvider, ValidationObserver } from 'vee-validate'
 
 export default {
   name: 'RegisterComponent',
-  components: {
-    ValidationProvider,
-    ValidationObserver
-  },
+  components: { ValidationProvider, ValidationObserver },
   data () {
     return {
       showForm: true,

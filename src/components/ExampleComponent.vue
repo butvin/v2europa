@@ -1,18 +1,15 @@
 <template>
   <div class="example-component">
-    <b-container>
-      <b-row>
-        <b-col>
-          <p class="display-1">Example Component</p>
-        </b-col>
-      </b-row>
-    </b-container>
+    <p>Example Component</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'ExampleComponent',
+  props: {
+    // toDo:
+  },
   data () {
     // toDo:
   }
