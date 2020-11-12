@@ -3,12 +3,11 @@
     <b-container>
       <b-row>
         <b-col>
-          <div class="registration-form">
-            <ValidationObserver v-slot="{ passes }">
+          <div class="registration-form" v-if="showForm">
+            <ValidationObserver v-slot="{ passes }" ref="form">
               <b-form
+                class="p-2 mb-4 mt-4 shadow-lg"
                 @submit.prevent="passes(onFormSubmit)"
-                v-if="showForm"
-                class="p-2 mb-4 mt-4"
               >
                 <!-- Title -->
                 <b-form-row class="mt-4">
@@ -16,6 +15,69 @@
                     <h3 class="text-center">Sign up</h3>
                   </b-col>
                 </b-form-row>
+
+                <!-- Email -->
+                <b-form-row class="mt-4">
+                  <b-col>
+                    <InputField
+                      v-model="form.email"
+                      field-title="Email address"
+                      rules="email|max:320"
+                      description="Type your actual email address here"
+                      autocomplete="off"
+                    />
+                  </b-col>
+                </b-form-row>
+
+                <!-- Phone -->
+                <b-form-row class="mt-4">
+                  <b-col>
+                    <InputField
+                      v-model="form.phone"
+                      field-title="Phone"
+                      rules="numeric|min:2|max:10"
+                    />
+                  </b-col>
+                </b-form-row>
+
+                <!-- Name -->
+                <b-form-row class="mt-4">
+                  <b-col>
+                    <InputField
+                      v-model="form.name"
+                      field-title="Name"
+                      placeholder="Type your full name"
+                      rules="required|min:2|max:10"
+                    />
+                  </b-col>
+                </b-form-row>
+
+                <!-- Password -->
+                <b-form-row class="mt-4">
+                  <b-col>
+                    <InputField
+                      v-model="form.password"
+                      type="password"
+                      field-title="Password"
+                      placeholder="Your password"
+                      rules="required|min:6|confirmed:passwordValue"
+                    />
+                  </b-col>
+                </b-form-row>
+
+                <!-- Confirm password -->
+                <b-form-row class="mt-4">
+                  <b-col>
+                    <InputField
+                      v-model="form.rePassword"
+                      type="password"
+                      field-title="Confirm password"
+                      rules="required"
+                      vid="passwordValue"
+                    />
+                  </b-col>
+                </b-form-row>
+
                 <!-- Email field -->
                 <b-form-row class="mt-4">
                   <b-col sm="1"></b-col>
@@ -30,7 +92,7 @@
                   <b-col sm="11">
                     <ValidationProvider
                       name="email"
-                      rules="min:3|email|max:320"
+                      rules="min:6|max:320"
                       v-slot="{
                         errors,
                         ariaMsg,
@@ -129,7 +191,7 @@
                       variant="success"
                       pill
                     >
-                      <span class="text-uppercase">sing up</span>
+                      <span class="btn text-uppercase">sing up</span>
                     </b-button>
                   </b-col>
                 </b-form-row>
@@ -182,9 +244,11 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-va
 // import { required, email } from 'vee-validate/dist/rules'
 // import { ValidationProvider, ValidationObserver } from 'vee-validate'
 
+import InputField from '@/components/auth/elements/InputField'
+
 export default {
   name: 'RegisterComponent',
-  components: { ValidationProvider, ValidationObserver },
+  components: { ValidationProvider, ValidationObserver, InputField },
   data () {
     return {
       showForm: true,
@@ -226,6 +290,7 @@ export default {
       this.showForm = false
       this.$nextTick(() => {
         this.showForm = true
+        this.$refs.observer.reset()
       })
     }
   }
@@ -234,8 +299,7 @@ export default {
 
 <style scoped>
 .register-component {
-  background: yellow;
-  /*background: #FFFFF3;*/
+  background: #E0E3DA;
 }
 .registration-form {
   margin: 20px auto;
@@ -243,5 +307,12 @@ export default {
   background: #fffff3;
   min-width: 375px;
   border: 1px solid #CED4DA;
+}
+.btn {
+  text-align: center;
+  cursor: pointer;
+  width: fit-content;
+  font-weight: 700;
+  position: relative;
 }
 </style>
