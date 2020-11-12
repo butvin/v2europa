@@ -5,7 +5,7 @@
         <b-nav>
           <b-nav-item style="background: tomato;">
             <router-link to="/" class="nav-link">
-              <span class="text-uppercase">home</span>
+              <b-icon icon="house-fill" font-scale="2"></b-icon>
             </router-link>
           </b-nav-item>
           <b-nav-item>

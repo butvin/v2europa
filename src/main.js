@@ -14,7 +14,7 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-// Font Awesome
+// Font Awesome & Co
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -31,9 +31,9 @@ Vue.use(axios, VueAxios)
 Vue.config.productionTip = false
 
 const app = new Vue({
-  render: h => h(App),
-  comments: { App },
-  router
+  components: { App },
+  router,
+  render: h => h(App)
 })
 
 app.$mount('#app')
