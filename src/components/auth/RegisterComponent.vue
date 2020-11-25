@@ -23,7 +23,7 @@
                       v-model="form.email"
                       field-title="Email address"
                       rules="email|max:320"
-                      description="Type your actual email address here"
+                      placeholder="Type your actual email address here"
                       autocomplete="off"
                     />
                   </b-col>
@@ -35,7 +35,7 @@
                     <InputField
                       v-model="form.phone"
                       field-title="Phone"
-                      rules="numeric|min:2|max:10"
+                      rules="numeric|min:12"
                     />
                   </b-col>
                 </b-form-row>

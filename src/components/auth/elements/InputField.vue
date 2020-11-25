@@ -15,9 +15,10 @@
     <b-form-group
       class="input-field-group m-0 p-0"
       :label="fieldTitle + (required ? ' *' : '')"
-      label-for="name+'_'+type+'_id'"
-      label-cols-sm="4"
-      label-cols-lg="3"
+      :label-for="name+'_'+type+'_id'"
+      label-cols-sm="2"
+      label-cols-md="5"
+      label-cols-lg="2"
     >
       <b-form-input
         v-model="innerValue"
@@ -27,7 +28,7 @@
         :type="type"
         :placeholder="placeholder"
         :name="name"
-        :id="innerValue+'_'+type+'_id'"
+        :id="name+'_'+type+'_id'"
         ref="inputFieldRef"
         :autocomplete="autocomplete"
         trim
