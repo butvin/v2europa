@@ -2,7 +2,9 @@
   <div id="app">
 <!--    <font-awesome-icon icon="user-secret" />-->
     <header-component></header-component>
-    <router-view></router-view>
+    <section id="app-content">
+      <router-view></router-view>
+    </section>
     <footer-component></footer-component>
   </div>
 </template>
@@ -24,5 +26,10 @@ export default {
 #app {
   color: #272625;
   background: #fffff3;
+}
+
+#app-content {
+  margin: 0;
+  padding: 0;
 }
 </style>

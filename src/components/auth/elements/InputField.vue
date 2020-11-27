@@ -1,10 +1,10 @@
 <template>
   <ValidationProvider
-    class="input-field-component position-relative w-100 m-0 p-0"
+    class="input-field-component"
     tag="div"
     :vid="vid"
     :rules="rules"
-    :name="fieldTitle"
+    :name="vvFieldName || label"
     v-slot="{
       errors,
       ariaInput,
@@ -12,50 +12,114 @@
       required
     }"
   >
-    <b-form-group
-      class="input-field-group m-0 p-0"
-      :label="fieldTitle + (required ? ' *' : '')"
-      :label-for="name+'_'+type+'_id'"
-      label-cols-sm="2"
-      label-cols-md="5"
-      label-cols-lg="2"
+    <b-form-text
+      class="input-field-group-description"
+      v-if="groupDescription"
+      :group-description="groupDescription"
+      text-variant="default"
+      tag="div"
     >
-      <b-form-input
-        v-model="innerValue"
-        v-bind="ariaInput"
-        class="input-field w-100 bg-transparent"
-        :class="{'input': true, 'is-invalid': errors[0], 'is-valid': hasValue }"
-        :type="type"
-        :placeholder="placeholder"
-        :name="name"
-        :id="name+'_'+type+'_id'"
-        ref="inputFieldRef"
-        :autocomplete="autocomplete"
-        trim
-      ></b-form-input>
-      <b-form-text
-        v-if="description"
-        class="input-field-description"
-      >{{ description }}</b-form-text>
-      <b-form-invalid-feedback
-        v-bind="ariaMsg"
-        class="input-field-error-area w-100 position-absolute"
+      {{groupDescription}}
+    </b-form-text>
+    <b-form-group
+      class="input-field-group-container"
+      :label="label + (required ? ' *' : '')"
+      :label-for="`_${name}_${type}_id`"
+      :label-class="{
+        'input-field-group-container-label': true,
+        'text-danger': errors[0],
+        'text-primary': hasValue
+      }"
+      label-cols-sm="0"
+      label-cols-md="1"
+      label-cols-lg="1"
+      label-cols-xl="2"
+      label-align-sm="left"
+      label-align-md="center"
+      label-align-lg="right"
+      label-align-xl="right"
+      :description="description"
+      :state="state"
+    >
+      <template
+        #label
+        class="slot-label"
       >
-        <b-icon icon="exclamation-circle-fill"></b-icon>
-        {{ errors[0] }}
-      </b-form-invalid-feedback>
+        <span>{{ label }}</span>
+      </template>
+      <b-form-text
+        v-if="topDescription"
+        class="input-field-top-description"
+      >
+        {{topDescription}}
+      </b-form-text>
+      <b-input-group
+        class="input-field-group"
+        :append-html="appendHtml"
+        :prepend-html="prependHtml"
+      >
+        <b-input-group-prepend
+          class="input-field-prepend"
+          v-if="icon"
+          is-text
+        >
+          <b-icon
+            class="input-field-prepend-icon"
+            :icon="icon"
+            :variant="iconVariant"
+            :font-scale="iconSize"
+            :class="{'text-danger': errors[0], 'text-primary': hasValue}"
+          >
+          </b-icon>
+        </b-input-group-prepend>
+        <b-form-input
+          :size="size"
+          v-model="innerValue"
+          v-bind="ariaInput"
+          :vv-field-name="vvFieldName"
+          :top-description="topDescription"
+          class="input-field"
+          :class="{'is-invalid': errors[0], 'is-valid': hasValue}"
+          :type="type"
+          :placeholder="placeholder"
+          :name="name"
+          :id="`_${name}_${type}_id`"
+          ref="inputFieldRef"
+          :autocomplete="autocomplete"
+          :bottom-description="bottomDescription"
+          trim
+        ></b-form-input>
+        <template v-if="true" #append>
+          <b-input-group-text class="input-field-append">
+            <b-icon
+              class="input-field-append-icon"
+              icon="envelope-fill"
+              :variant="iconVariant"
+            ></b-icon>
+          </b-input-group-text>
+        </template>
+        <b-form-invalid-feedback
+          v-bind="ariaMsg"
+          class="input-field-invalid-feedback"
+          tag="div"
+          tooltip>
+          <b-icon icon="exclamation-circle-fill"></b-icon>
+          {{ errors[0] }}
+        </b-form-invalid-feedback>
+      </b-input-group>
+      <b-form-text
+        class="input-field-bottom-description"
+        v-if="bottomDescription"
+      >
+        {{ bottomDescription }}
+      </b-form-text>
     </b-form-group>
   </ValidationProvider>
 </template>
 
 <script>
-import {
-  ValidationProvider,
-  extend,
-  localize
-} from 'vee-validate/dist/vee-validate.full'
-
-// import ru from 'vee-validate/dist/locale/en.json'
+import { ValidationProvider, extend, localize } from 'vee-validate/dist/vee-validate.full'
+// import en from 'vee-validate/dist/locale/en.json'
 
 localize({
   en: {
@@ -90,7 +154,27 @@ export default {
       type: String,
       default: ''
     },
+    label: {
+      type: String,
+      default: ''
+    },
+    vvFieldName: {
+      type: String,
+      default: ''
+    },
     description: {
+      type: String,
+      default: ''
+    },
+    groupDescription: {
+      type: String,
+      default: ''
+    },
+    topDescription: {
+      type: String,
+      default: ''
+    },
+    bottomDescription: {
       type: String,
       default: ''
     },
@@ -132,13 +216,33 @@ export default {
       type: String,
       default: ''
     },
-    fieldTitle: {
-      type: String,
-      default: ''
-    },
     vid: {
       type: String,
       default: undefined
+    },
+    prependHtml: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
+    size: {
+      type: String,
+      default: ''
+    },
+    iconSize: {
+      type: String,
+      default: ''
+    },
+    iconVariant: {
+      type: String,
+      default: ''
+    },
+    appendHtml: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({
@@ -152,6 +256,9 @@ export default {
   computed: {
     hasValue () {
       return !!this.innerValue
+    },
+    state () {
+      return true
     }
   },
   watch: {
@@ -168,29 +275,100 @@ export default {
 </script>
 
 <style scoped>
+
+.input-field-component {
+  padding: 1rem 0;
+  background: tomato;
+  overflow: hidden;
+}
 .input-field-component input {
   border-radius: 0;
-  padding-bottom: 18px;
-  position: relative;
-  z-index: 99999;
-  padding-top: 1.4rem;
+  background: #272625;
+  color: #f9d423;
+}
+.input-field-invalid-feedback {
+  float: right !important;
+  background: tomato;
+  border-radius: 0;
+  opacity: 1;
+  border: 1px solid whitesmoke;
+  padding: .5rem;
+}
+.input-field-component input::placeholder {
+  letter-spacing: 4px;
+  color: tomato;
+}
+/*-----------------------------------------------------*/
+.input-field-group-container {
+  padding: 1rem 0;
+  background: #272625;
+  color: #fffff3;
+}
+
+.input-field-group-container-label {
+  background: #566270;
+  color: yellowgreen;
+}
+
+.input-field-group-description {
+  background: #f9d423;
+  padding: 1rem 2rem;
+}
+
+.input-field-group {
+  padding: 1rem 1rem;
+  background: #A593E0;
+/*  */
+}
+
+.input-field-top-description {
+  color: aquamarine !important;
+  background: darkslategrey;
+  padding: 1rem 1rem;
+}
+
+.input-field-prepend {
+  border-radius: 0;
+  font-size: 4.4rem !important;
+}
+
+.input-field-prepend-icon {
+  padding: 1rem 1rem;
+  background: indigo;
+}
+
+.input-field input {
+
+}
+
+.input-field-append {
+  background: grey;
+  color: tomato;
+}
+
+.input-field-append-icon {
+  font-size: 4.4rem !important;
+}
+
+.input-field-bottom-description {
+  color: aquamarine !important;
+  background: darkslategrey;
+  padding: 1rem 1rem;
 }
 
 .input-field-component input .has-value,
 .input-field-component input :focus {
-   outline: none;
+  border: 4px solid crimson !important;
  }
 
 .input-field-component label {
-  margin-top: 1rem;
+  /*margin-top: 1rem;*/
   user-select: none;
 }
 
 .input-field-component input.has-value ~ label,
 .input-field-component input:focus ~ label {
-  font-size: 0.6rem;
-  margin-top: 0;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 </style>
